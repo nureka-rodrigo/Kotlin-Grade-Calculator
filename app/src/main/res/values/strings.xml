@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Kotlin-Grade-Calculator</string>
+    <string name="calButton">Calculate</string>
+    <string name="outputGrade" />
+    <string name="inputMarks">Enter Marks</string>
+    <string name="themeSwitch">Dark Mode</string>
+</resources>
