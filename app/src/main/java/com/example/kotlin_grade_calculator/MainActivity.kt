@@ -41,8 +41,8 @@ class MainActivity : AppCompatActivity() {
             val marks = inputMarks.text.toString().toIntOrNull()
             val spacer = findViewById<View>(R.id.spacer)
 
-            if (marks != null) {
-                // If the conversion is successful, calculate the grade
+            if (marks != null && marks in 0..100) {
+                // If the conversion is successful and marks are within valid range, calculate the grade
                 val grade = calculateGrade(marks)
                 // Display the grade
                 outputGrade.text = grade
@@ -52,9 +52,13 @@ class MainActivity : AppCompatActivity() {
                 // Show a success message
                 Toast.makeText(this, "Grade calculated successfully", Toast.LENGTH_SHORT).show()
             } else {
-                // If the conversion is not successful, show an error message
+                // If the conversion is not successful or marks are not within valid range, show an error message
                 spacer.layoutParams.height = 50
-                Toast.makeText(this, "Invalid input. Please enter a valid number", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Invalid input. Please enter a number between 0 and 100",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
     }
@@ -62,6 +66,8 @@ class MainActivity : AppCompatActivity() {
     // Function to calculate the grade based on the marks
     private fun calculateGrade(marks: Int): String {
         return when {
+            marks > 100 -> "Marks cannot be greater than 100"
+            marks < 0 -> "Marks cannot be less than 0"
             marks >= 85 -> "A+"
             marks >= 70 -> "A"
             marks >= 65 -> "A-"
